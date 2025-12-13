@@ -1,5 +1,4 @@
 import { createServer } from 'http'
-import { parse } from 'url'
 import next from 'next'
 import getPort from 'get-port'
 import { trace } from '@opentelemetry/api'
@@ -27,7 +26,7 @@ async function main() {
     // Create a local parent span to simulate custom server behavior
     tracer.startActiveSpan('custom-server-request', async (span) => {
       try {
-        const parsedUrl = parse(req.url!, true)
+        const parsedUrl = new URL(req.url!, `http://${req.headers.host}`)
         await handle(req, res, parsedUrl)
         span.end()
       } catch (err) {

@@ -8,7 +8,7 @@ import { removeBasePath } from '../../../../client/remove-base-path'
 import { parseRelativeUrl, type ParsedRelativeUrl } from './parse-relative-url'
 
 interface ParsedAs extends Omit<ParsedRelativeUrl, 'slashes'> {
-  slashes: boolean | undefined
+  slashes: boolean | null | undefined
 }
 
 export default function resolveRewrites(
