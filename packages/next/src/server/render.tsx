@@ -287,6 +287,7 @@ export type RenderOptsPartial = {
   expireTime?: number
   experimental: {
     clientTraceMetadata?: string[]
+    cdnCacheControlHeader?: string
   }
 }
 
@@ -555,7 +556,11 @@ export async function renderToHTMLImpl(
   // ensure we set cache header so it's not rendered on-demand
   // every request
   if (isAutoExport && !dev && isExperimentalCompile) {
-    setCacheControlHeaders(res, { revalidate: false, expire: expireTime })
+    setCacheControlHeaders(
+      res,
+      { revalidate: false, expire: expireTime },
+      renderOpts.experimental.cdnCacheControlHeader
+    )
     isAutoExport = false
   }
 

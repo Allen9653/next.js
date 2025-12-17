@@ -280,6 +280,12 @@ export interface ExperimentalConfig {
   linkNoTouchStart?: boolean
   caseSensitiveRoutes?: boolean
   /**
+   * Custom header name to use for CDN cache control instead of the default
+   * 'CDN-Cache-Control'. This can be used to target specific CDN providers
+   * that do not support `CDN-Cache-Control` and have their own custom header.
+   */
+  cdnCacheControlHeader?: string
+  /**
    * The origins that are allowed to write the rewritten headers when
    * performing a non-relative rewrite. When undefined, no non-relative
    * rewrites will get the rewrite headers.
@@ -1501,6 +1507,7 @@ export const defaultConfig = Object.freeze({
     serverMinification: true,
     linkNoTouchStart: false,
     caseSensitiveRoutes: false,
+    cdnCacheControlHeader: undefined,
     clientParamParsingOrigins: undefined,
     dynamicOnHover: false,
     preloadEntriesOnStart: true,
@@ -1648,6 +1655,7 @@ export interface NextConfigRuntime {
     | 'clientParamParsingOrigins'
     | 'adapterPath'
     | 'allowedRevalidateHeaderKeys'
+    | 'cdnCacheControlHeader'
     | 'fetchCacheKeyPrefix'
     | 'isrFlushToDisk'
     | 'optimizeCss'
@@ -1702,6 +1710,7 @@ export function getNextConfigRuntime(
         clientParamParsingOrigins: ex.clientParamParsingOrigins,
         adapterPath: ex.adapterPath,
         allowedRevalidateHeaderKeys: ex.allowedRevalidateHeaderKeys,
+        cdnCacheControlHeader: ex.cdnCacheControlHeader,
         fetchCacheKeyPrefix: ex.fetchCacheKeyPrefix,
         isrFlushToDisk: ex.isrFlushToDisk,
         optimizeCss: ex.optimizeCss,

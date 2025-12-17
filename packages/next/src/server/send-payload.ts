@@ -39,6 +39,7 @@ export async function sendRenderResult({
   generateEtags,
   poweredByHeader,
   cacheControl,
+  cdnCacheControlHeader,
 }: {
   req: IncomingMessage
   res: ServerResponse
@@ -46,6 +47,7 @@ export async function sendRenderResult({
   generateEtags: boolean
   poweredByHeader: boolean
   cacheControl: CacheControl | undefined
+  cdnCacheControlHeader?: string
 }): Promise<void> {
   if (isResSent(res)) {
     return
@@ -58,7 +60,7 @@ export async function sendRenderResult({
   // If cache control is already set on the response we don't
   // override it to allow users to customize it via next.config
   if (cacheControl && !res.getHeader('Cache-Control')) {
-    setCacheControlHeaders(res, cacheControl)
+    setCacheControlHeaders(res, cacheControl, cdnCacheControlHeader)
   }
 
   const payload = result.isDynamic ? null : result.toUnchunkedString()

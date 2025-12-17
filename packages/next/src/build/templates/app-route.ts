@@ -452,7 +452,11 @@ export async function handler(
         !res.getHeader('Cache-Control') &&
         !headers.get('Cache-Control')
       ) {
-        setCacheControlHeadersOnHeaders(headers, cacheEntry.cacheControl)
+        setCacheControlHeadersOnHeaders(
+          headers,
+          cacheEntry.cacheControl,
+          nextConfig.experimental.cdnCacheControlHeader
+        )
       }
 
       await sendResponse(

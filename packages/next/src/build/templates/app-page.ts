@@ -1136,6 +1136,8 @@ export async function handler(
               RSC_CONTENT_TYPE_HEADER
             ),
             cacheControl: cacheEntry.cacheControl,
+            cdnCacheControlHeader:
+              nextConfig.experimental.cdnCacheControlHeader,
           })
         }
 
@@ -1153,6 +1155,7 @@ export async function handler(
           poweredByHeader: nextConfig.poweredByHeader,
           result: RenderResult.EMPTY,
           cacheControl: cacheEntry.cacheControl,
+          cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
         })
       }
 
@@ -1242,6 +1245,8 @@ export async function handler(
                 poweredByHeader: nextConfig.poweredByHeader,
                 result: RenderResult.EMPTY,
                 cacheControl: cacheEntry.cacheControl,
+                cdnCacheControlHeader:
+                  nextConfig.experimental.cdnCacheControlHeader,
               })
             } else {
               // Otherwise this case is not expected.
@@ -1258,6 +1263,8 @@ export async function handler(
             poweredByHeader: nextConfig.poweredByHeader,
             result: cachedData.html,
             cacheControl: cacheEntry.cacheControl,
+            cdnCacheControlHeader:
+              nextConfig.experimental.cdnCacheControlHeader,
           })
         }
 
@@ -1273,6 +1280,7 @@ export async function handler(
             RSC_CONTENT_TYPE_HEADER
           ),
           cacheControl: cacheEntry.cacheControl,
+          cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
         })
       }
 
@@ -1305,6 +1313,7 @@ export async function handler(
           poweredByHeader: nextConfig.poweredByHeader,
           result: body,
           cacheControl: cacheEntry.cacheControl,
+          cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
         })
       }
 
@@ -1331,6 +1340,7 @@ export async function handler(
           poweredByHeader: nextConfig.poweredByHeader,
           result: body,
           cacheControl: { revalidate: 0, expire: undefined },
+          cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
         })
       }
 
@@ -1390,6 +1400,7 @@ export async function handler(
         // the response being sent to the client it's dynamic parts are streamed
         // to the client on the same request.
         cacheControl: { revalidate: 0, expire: undefined },
+        cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
       })
     }
 

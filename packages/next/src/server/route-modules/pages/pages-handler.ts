@@ -609,7 +609,11 @@ export const getHandler = ({
         // If cache control is already set on the response we don't
         // override it to allow users to customize it via next.config
         if (cacheControl && !res.getHeader('Cache-Control')) {
-          setCacheControlHeaders(res, cacheControl)
+          setCacheControlHeaders(
+            res,
+            cacheControl,
+            nextConfig.experimental.cdnCacheControlHeader
+          )
         }
 
         // notFound: true case
@@ -720,6 +724,7 @@ export const getHandler = ({
           generateEtags: nextConfig.generateEtags,
           poweredByHeader: nextConfig.poweredByHeader,
           cacheControl: routeModule.isDev ? undefined : cacheControl,
+          cdnCacheControlHeader: nextConfig.experimental.cdnCacheControlHeader,
         })
       }
 

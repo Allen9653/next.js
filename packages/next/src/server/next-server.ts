@@ -606,6 +606,7 @@ export default class NextNodeServer extends BaseServer<
       generateEtags: boolean
       poweredByHeader: boolean
       cacheControl: CacheControl | undefined
+      cdnCacheControlHeader?: string
     }
   ): Promise<void> {
     return sendRenderResult({
@@ -615,6 +616,7 @@ export default class NextNodeServer extends BaseServer<
       generateEtags: options.generateEtags,
       poweredByHeader: options.poweredByHeader,
       cacheControl: options.cacheControl,
+      cdnCacheControlHeader: options.cdnCacheControlHeader,
     })
   }
 
